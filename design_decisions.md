@@ -1,3 +1,47 @@
 # Design Decisions
 
-The application was designed with modularity and simplicity in mind due to the 3-hour time constraint. Django and Django REST Framework were chosen for their rapid API development capabilities. Three main models were created: Employee, Attendance, and Performance, with proper foreign key relationships to normalize the data. Employee contains general details, Attendance records daily presence, Department conains the department name details and Performance holds monthly ratings and remarks. The Faker library was used to quickly generate synthetic data for seeding. MySQL was selected for the database since it integrates easily with MySQL Workbench. DRF ViewSets and routers were used for efficient endpoint creation. Swagger UI was integrated using drf-yasg to allow testing and exploring endpoints visually. The focus was placed on core functionality, RESTful design, and clean code. Optional enhancements like Docker, unit testing, and data export were deprioritized to focus on completing a functional and presentable solution within the time limit.
+## Architecture
+
+- **Framework:** Django with Django REST Framework was chosen for fast API building, built-in admin, and authentication support.
+- **Database:** Mysql was selected due to compatibility and realistic enterprise use-cases.
+- **Data Generation:** Faker library is used to simulate realistic employee and performance data.
+
+## Database Design
+
+Three main models:
+- `Employee`: Stores name, position, joining date, department, etc.
+- `Departent` : Stores role / name of employees with id.
+- `Performance`: Linked to Employee, stores KPIs like efficiency, punctuality.
+- `Attendance`: (optional) Logs daily check-in/check-out times.
+
+Relationships:
+- One-to-many between Employee -> Department -> Performance and Employee -> Attendance
+
+## REST API Design
+
+- Used DRF's class-based views and `ModelViewSet` for CRUD operations.
+- Token-based auth (`rest_framework.authtoken`) for secure access.
+- Throttling enabled using `UserRateThrottle`.
+
+## Testing & Validation
+
+- Basic unit tests for model creation and API response.
+- Swagger UI for real-time API validation.
+- Graceful handling of invalid inputs with DRF error responses.
+
+## Visualizations
+
+- Simple line/bar charts with Chart.js for performance summaries.
+- Data is fetched via API and displayed on a minimal HTML template.
+
+
+## Security
+
+- `.env` used to store sensitive credentials.
+- DRF permissions and throttling to prevent abuse.
+
+##  Time Management Strategy
+
+- Phase 1 (0–1 hr): Set up models, data generation script
+- Phase 2 (1–2 hr): Create APIs and authentication
+- Phase 3 (2–3 hr): Add Swagger, visualization, polish
