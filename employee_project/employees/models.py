@@ -14,7 +14,7 @@ class Employee(models.Model):
 class Attendance(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     date = models.DateField()
-    status = models.CharField(max_length=10)  # Present / Absent
+    status = models.CharField(max_length=10)  
 
 class Performance(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)

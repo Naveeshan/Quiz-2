@@ -4,6 +4,7 @@ from .views import *
 
 router = DefaultRouter()
 router.register('employees', EmployeeViewSet)
+router.register('department', DepartmentViewSet)
 router.register('attendance', AttendanceViewSet)
 router.register('performance', PerformanceViewSet)
 
